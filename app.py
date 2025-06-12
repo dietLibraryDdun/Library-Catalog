@@ -196,7 +196,7 @@ def login():
         username = st.text_input("Username")
         password = st.text_input("Password", type="password")
         if st.button("Login", key="login"):
-            if username == "admin" and password == "admin123":
+            if username == "diet" and password == "dietlb1983":
                 st.session_state.logged_in = True
                 st.session_state.username = username
                 st.session_state.view_mode = 'admin'
@@ -250,7 +250,7 @@ def main_app(username):
                 with st.form("add_book_form"):
                     new_name = st.text_input("Book Name")
                     new_number = st.text_input("Book Number (can be alphanumeric)")
-                    new_author = st.text_input("Author (optional)")
+                    new_author = st.text_input("Author/Publication (optional)")
                     submitted = st.form_submit_button("Add Book")
 
                     if submitted:
