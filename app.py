@@ -266,7 +266,7 @@ def main_app(username):
                 with st.form("add_book_form"):
                     new_name = st.text_input("Book Name")
                     new_number = st.text_input("Book Number (can be alphanumeric)")
-                    new_author = st.text_input("Author (optional)")
+                    new_author = st.text_input("Author/Publication (optional)")
                     submitted = st.form_submit_button("Add Book")
 
                     if submitted:
