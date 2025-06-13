@@ -25,7 +25,7 @@ def get_categories():
     c.execute("SELECT DISTINCT category FROM books")
     cats = [row[0] for row in c.fetchall()]
     conn.close()
-    return sorted(cats)
+    return cats
 
 def get_books_by_category(category):
     conn = sqlite3.connect(DB_FILE)
