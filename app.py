@@ -447,12 +447,42 @@ def main_app(username):
             color: #fff;
         }
         </style>
-        <div class="catalog-title">DIET Dehradun 📖Library Catalog</div>
+        <div class="catalog-title">DIET Dehradun 📚Library Catalog</div>
         """
         , unsafe_allow_html=True)
 
     total_books = get_total_books()
     st.markdown(f'<div class="total-books">Total Books: {total_books}</div>', unsafe_allow_html=True)
+
+    # Add PDF button with styling
+    st.markdown("""
+        <style>
+        .pdf-button {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .pdf-button a {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .pdf-button a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, #45a049, #4CAF50);
+        }
+        </style>
+        <div class="pdf-button">
+            <a href="https://1024terabox.com/s/1UYnyARbZP_jGDSF77MxkZQ" target="_blank">📚 Access Book PDFs</a>
+        </div>
+    """, unsafe_allow_html=True)
 
     categories = get_categories()
     if not categories:
