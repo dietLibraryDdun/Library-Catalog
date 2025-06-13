@@ -221,6 +221,13 @@ def login():
             else:
                 st.error("Invalid credentials.")
 
+def get_total_books():
+    conn = sqlite3.connect(DB_FILE)
+    c = conn.cursor()
+    c.execute("SELECT COUNT(*) FROM books")
+    total = c.fetchone()[0]
+    conn.close()
+    return total
 
 def main_app(username):
     st.markdown(
@@ -231,14 +238,23 @@ def main_app(username):
             font-size: 48px;
             font-weight: bold;
             margin-top: 40px;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
             color: #2c3e50;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        .total-books {
+            text-align: center;
+            font-size: 24px;
+            color: #34495e;
+            margin-bottom: 40px;
         }
         </style>
         <div class="catalog-title">DIET Dehradun 📖Library Catalog</div>
         """
         , unsafe_allow_html=True)
+
+    total_books = get_total_books()
+    st.markdown(f'<div class="total-books">Total Books: {total_books}</div>', unsafe_allow_html=True)
 
     categories = get_categories()
     if not categories:
