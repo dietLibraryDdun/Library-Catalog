@@ -48,6 +48,22 @@ def delete_book(book_id):
     conn.commit()
     conn.close()
 
+def add_category(category_name):
+    conn = sqlite3.connect(DB_FILE)
+    c = conn.cursor()
+    c.execute("INSERT INTO books (name, number, author, category) VALUES (?, ?, ?, ?)",
+              ("New Book", "000", None, category_name))
+    conn.commit()
+    conn.close()
+
+def delete_category(category_name):
+    conn = sqlite3.connect(DB_FILE)
+    c = conn.cursor()
+    # First delete all books in this category
+    c.execute("DELETE FROM books WHERE category = ?", (category_name,))
+    conn.commit()
+    conn.close()
+
 def logout():
     st.session_state.logged_in = False
     st.session_state.username = None
@@ -275,6 +291,32 @@ def main_app(username):
                         st.rerun()
 
         st.markdown("---")
+        
+        # Category management section moved here
+        with st.expander("📁 Manage Categories", expanded=True):
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                with st.form("add_category_form"):
+                    new_category = st.text_input("New Category Name")
+                    submitted = st.form_submit_button("Add Category")
+                    if submitted:
+                        if not new_category.strip():
+                            st.error("Category name cannot be empty.")
+                        else:
+                            add_category(new_category.strip())
+                            st.success(f"Added category '{new_category}'.")
+                            st.rerun()
+            
+            with col2:
+                if categories:
+                    category_to_delete = st.selectbox("Select category to delete", options=categories)
+                    if st.button("Delete Category"):
+                        if st.warning(f"Are you sure you want to delete '{category_to_delete}'? This will also delete all books in this category."):
+                            delete_category(category_to_delete)
+                            st.success(f"Deleted category '{category_to_delete}' and all its books.")
+                            st.rerun()
+
         if st.button("Logout"):
             logout()
     else:
