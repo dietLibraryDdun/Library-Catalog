@@ -175,7 +175,7 @@ def login():
             margin-bottom: 10px;
         }
         </style>
-        <div class="title-center">📚 Library Catalog</div>
+        <div class="title-center">DIET Dehradun 📚Library Catalog</div>
         """
         , unsafe_allow_html=True)
 
@@ -236,7 +236,7 @@ def main_app(username):
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
         </style>
-        <div class="catalog-title">📖 Library Catalog</div>
+        <div class="catalog-title">DIET Dehradun 📖Library Catalog</div>
         """
         , unsafe_allow_html=True)
 
